@@ -1,0 +1,20 @@
+html, body {
+	margin: 0px;
+	padding: 0px;
+	overflow-y:;
+}
+
+.main {
+	width: 1000px;
+	margin:50px auto;
+}
+
+canvas {
+    display: inline-block;
+    margin: auto;
+    border: 1px solid black;
+}
+
+#player {
+	float: right;
+}
