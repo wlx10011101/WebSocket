@@ -9,16 +9,18 @@ Created on Sep 2, 2017
 
 import json
 import logging
+import re
 
 from bottle import route, run, request, response
 import bottle
 from bottle_websocket.plugin import websocket
+from bottle_websocket.server import GeventWebSocketServer
 
 from customer.data import shapeData
-from bottle_websocket.server import GeventWebSocketServer
 
 
 shapeDataHandler = shapeData()
+registryWebsocket = {}
 
 
 @route('/tetris', method='get')
@@ -31,13 +33,34 @@ def getShapeData():
 def communication(ws):
     while True:
         msg = ws.receive()
-        print dir(msg)
-        print "11", msg
         if msg is not None:
-            ws.send(msg)
+            if re.search("registerWebsocket", msg):
+                register(ws)
+            else:
+                print ws, msg
+                send_msg_to_other_websocket(ws, msg)
         else:
-            #             break
             print msg
+
+
+def send_msg_to_other_websocket(ws, msg):
+    print ws, msg
+    for _, websocket in registryWebsocket.items():
+        if websocket != ws:
+            websocket.send(msg)
+
+
+def register(ws):
+    wsKey = (ws.environ.get('SERVER_NAME'), ws.environ.get('REMOTE_PORT'))
+    if wsKey not in registryWebsocket.keys():
+        registryWebsocket.update({wsKey: ws})
+        print "register", wsKey
+
+
+@route('/websocketRegistery', apply=[websocket])
+def socketRegister(ws):
+    msg = ws.receive()
+    print dir(ws)
 
 
 @route('/')

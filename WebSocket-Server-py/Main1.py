@@ -15,6 +15,5 @@ if __name__ == "__main__":
     ws1 = create_connection("ws://127.0.0.1:3035/websocket")
     ws1.send("registerWebsocket")
     while True:
-        msg = ws1.recv_data()
-        if len(msg):
-            print msg
+        msg = raw_input("print: ")
+        ws1.send(msg)
