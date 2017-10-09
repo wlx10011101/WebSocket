@@ -24,8 +24,8 @@ var colors = [
 ];
 
 var tetris = [];
-var serverIp = '10.9.176.22'
-var serverHost = 'http://'+ serverIp + ':3035';
+var serverIp = 'localhost'
+var serverHost = 'http://'+ serverIp + ':8888';
 var tetrisId = 0;
 var shapeId = 0;
 
@@ -65,7 +65,7 @@ function init() {
     tetrisId = 0;
     shapeId = 0;
 
-    $.get('http://10.9.176.22:3035/tetris', {'id': '0'}, function (data, status) {
+    $.get('http://localhost:8888/tetris', {'id': '0'}, function (data, status) {
         console.log(data)
         tetris = data;
         shapeId += 1;
@@ -97,7 +97,7 @@ function tick() {
             $.get(serverHost + '/tetris?id=' + tetrisId.toString(), function (data, status) {
                 tetris = tetris.concat(data);
                 console.log(tetris);
-            });
+            }, "json");
         }
     }
 }
