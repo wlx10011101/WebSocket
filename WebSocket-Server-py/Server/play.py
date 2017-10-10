@@ -78,4 +78,4 @@ def static_js_files(filename):
     return bottle.static_file(filename, root='../public/js/')
 
 if __name__ == "__main__":
-    run(host='0.0.0.0', port=3035, debug=logging.DEBUG, server=GeventWebSocketServer)
+    run(host='0.0.0.0', port=8888, debug=logging.DEBUG, server=GeventWebSocketServer)

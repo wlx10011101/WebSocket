@@ -1,4 +1,4 @@
-let ws = new WebSocket("ws://" + serverIp + ":8181");
+let ws = new WebSocket("ws://" + serverIp + ":8888");
 let currentRoom = undefined;
 
 ws.onopen = function (e) {

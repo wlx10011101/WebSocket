@@ -23,8 +23,8 @@ var colors = [
     'cyan', 'orange', 'blue', 'yellow', 'red', 'green', 'purple'
 ];
 
-var tetris = [];
-var serverIp = 'localhost'
+
+var serverIp = '10.9.176.22'
 var serverHost = 'http://'+ serverIp + ':8888';
 var tetrisId = 0;
 var shapeId = 0;
@@ -65,8 +65,9 @@ function init() {
     tetrisId = 0;
     shapeId = 0;
 
-    $.get('http://localhost:8888/tetris', {'id': '0'}, function (data, status) {
-        console.log(data)
+
+    $.get('http://10.9.176.22:8888/tetris', {'id': '0'}, function (data, status) {
+        console.log(typeof data)
         tetris = data;
         shapeId += 1;
         newShape(tetris[shapeId]);
@@ -95,6 +96,8 @@ function tick() {
         if (shapeId >= tetris.length - 10) {
             tetrisId += 1
             $.get(serverHost + '/tetris?id=' + tetrisId.toString(), function (data, status) {
+                console.log(typeof data)
+                console.log(data)
                 tetris = tetris.concat(data);
                 console.log(tetris);
             }, "json");
@@ -180,7 +183,7 @@ function valid( offsetX, offsetY, newCurrent ) {
     offsetX = currentX + offsetX;
     offsetY = currentY + offsetY;
     newCurrent = newCurrent || current;
-    console.log(current)
+    // console.log(current)
 
 
 

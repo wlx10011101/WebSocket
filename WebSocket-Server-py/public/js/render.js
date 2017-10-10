@@ -1,8 +1,8 @@
 var playerCanvas = document.getElementById('player');
 var ctx = playerCanvas.getContext( '2d' );
 var W = 300, H = 600;
-console.log(COLS)
-console.log(ROWS)
+// console.log(COLS)
+// console.log(ROWS)
 var BLOCK_W = W / COLS, BLOCK_H = H / ROWS;
 
 // draw a single square at (x, y)
