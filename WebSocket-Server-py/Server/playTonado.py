@@ -5,7 +5,6 @@ Created on 20170924
 
 @author: WLX
 '''
-import json
 import logging
 import os
 import re
